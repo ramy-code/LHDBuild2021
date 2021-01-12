@@ -9,11 +9,9 @@ def print_board():
         print("\n--------------------")
     
 
-def play():
-    position_X = int(input("Player X : Pick a number between 1 and 9 to play in")) - 1
-    position_O = int(input("Player O : Pick a number between 1 and 9 to play in")) - 1
-    board[int(position_X/3)][position_X%3] = "X"
-    board[int(position_O/3)][position_O%3] = "O"
+def play(player):
+    position = int(input("Player" + player +  ": Pick a number between 1 and 9 to play in")) - 1
+    board[int(position/3)][position%3] = player
 
 def compute_position():
     for i in range(0,3):
@@ -32,7 +30,13 @@ def compute_position():
 # Main Loop
 turn = 0
 while(turn<5):
-    play()
+    play("X")
+    print_board()
+    winner = compute_position()
+    if(winner == "X" or winner == "O"):
+        print("Congratulations "+ winner + " you won!")
+        exit()
+    play("O")
     print_board()
     winner = compute_position()
     if(winner == "X" or winner == "O"):
